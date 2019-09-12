@@ -10,19 +10,25 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 
+//Redux
+import {Provider} from 'react-redux';
+import store from './redux/store';
+
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Navbar />
-        <div className="container">
-          <Switch>
-            <Route exact path="/" component={home} />
-            <Route exact path="/login" component={login} />
-            <Route exact path="/signup" component={signup} />
-          </Switch>
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={home} />
+              <Route exact path="/login" component={login} />
+              <Route exact path="/signup" component={signup} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
     </div>
   );
 }
