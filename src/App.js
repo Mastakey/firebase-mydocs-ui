@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
+import post from './pages/post';
 
 //Redux
 import {Provider} from 'react-redux';
@@ -25,6 +26,7 @@ function App() {
               <Route exact path="/" component={home} />
               <Route exact path="/login" component={login} />
               <Route exact path="/signup" component={signup} />
+              <Route exact path="/post" component={post} />
             </Switch>
           </div>
         </Router>

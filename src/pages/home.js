@@ -1,28 +1,21 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { getMyDocs } from '../redux/actions/dataActions';
 
 export class home extends Component {
     state = {
         mydocs: null
     }
     async componentDidMount(){
-        try {
-            const mydocs = await axios.get(`/mydoc`);
-            //console.log(mydocs.data);
-            this.setState({
-                mydocs: mydocs.data
-            });
-        }
-        catch (err) {
-            console.log(err);
-        }
+        this.props.getMyDocs();
     }
     render() {
         let docsMarkup;
         //this.state.mydocs contains all mydocs
-        if (this.state.mydocs){
+        if (this.props.data.mydocs){
             let key = 0;
-            docsMarkup = this.state.mydocs.map(mydoc => {
+            docsMarkup = this.props.data.mydocs.map(mydoc => {
                 key++;
                 return (
                     <p key={key}>{mydoc.title}</p>
@@ -44,4 +37,13 @@ export class home extends Component {
     }
 }
 
-export default home
+home.propTypes = {
+    getMyDocs: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    data: state.data
+})
+
+export default connect(mapStateToProps, {getMyDocs})(home);
