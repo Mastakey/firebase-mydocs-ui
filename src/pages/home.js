@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { getMyDocs } from '../redux/actions/dataActions';
 
+//Material UI
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
 export class home extends Component {
     state = {
         mydocs: null
@@ -18,7 +22,9 @@ export class home extends Component {
             docsMarkup = this.props.data.mydocs.map(mydoc => {
                 key++;
                 return (
-                    <p key={key}>{mydoc.title}</p>
+                    <Grid item xs={3}>
+                        <Paper key={key}>{mydoc.title}</Paper>
+                    </Grid>
                 )
             }); 
             console.log(docsMarkup);
@@ -31,7 +37,9 @@ export class home extends Component {
         return (
             <div>
                 <h1>Home</h1>
-                {docsMarkup}
+                <Grid container spacing={3}>
+                    {docsMarkup}
+                </Grid>
             </div>
         )
     }

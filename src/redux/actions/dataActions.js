@@ -30,7 +30,7 @@ export const postMyDoc = (mydoc) => async (dispatch) => {
         dispatch({
             type: CLEAR_ERRORS,
             payload: []
-        })
+        });
     } catch (err) {
         console.log(err);
     }

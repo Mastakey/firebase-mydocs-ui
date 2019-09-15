@@ -9,8 +9,10 @@ class PostMydoc extends Component {
         category: '',
         content: ''
     };
-    handleSubmit(){
-        alert('submit');
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state);
+        this.props.postMyDoc(this.state);
     }
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
