@@ -14,6 +14,29 @@ import post from './pages/post';
 //Redux
 import {Provider} from 'react-redux';
 import store from './redux/store';
+import {SET_AUTH} from './redux/types';
+import { getUserData } from './redux/actions/userActions';
+
+//Auth
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
+
+const token = localStorage.FBIdToken;
+if (token){
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken);
+  if (decodedToken.exp * 1000 < Date.now()){
+    //Expired token
+    //window.location.href = '/login';
+    //store.dispatch(logoutUser());
+    window.location.href = '/';
+  }
+  else {
+    store.dispatch({ type: SET_AUTH }); 
+    axios.defaults.headers.common['Authorization'] = token;
+    store.dispatch(getUserData());
+  }
+}
 
 function App() {
   return (
