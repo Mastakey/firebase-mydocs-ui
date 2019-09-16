@@ -6,6 +6,14 @@ import { getMyDocs } from '../redux/actions/dataActions';
 //Material UI
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const styles = withStyles(theme => ({
+    root: {
+      padding: theme.spacing(3, 2),
+    },
+  }));
 
 export class home extends Component {
     state = {
@@ -16,6 +24,8 @@ export class home extends Component {
     }
     render() {
         let docsMarkup;
+        console.log(this.props);
+        //const { classes } = this.props;
         //this.state.mydocs contains all mydocs
         if (this.props.data.mydocs){
             let key = 0;
@@ -23,7 +33,11 @@ export class home extends Component {
                 key++;
                 return (
                     <Grid item xs={3}>
-                        <Paper key={key}>{mydoc.title}</Paper>
+                        <Paper key={key}>
+                            <Typography variant="h5" component="h3">
+                                {mydoc.title}
+                            </Typography>
+                        </Paper>
                     </Grid>
                 )
             }); 
@@ -47,11 +61,12 @@ export class home extends Component {
 
 home.propTypes = {
     getMyDocs: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, {getMyDocs})(home);
+export default connect(mapStateToProps, {getMyDocs})(withStyles(styles)(home));

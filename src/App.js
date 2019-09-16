@@ -21,6 +21,8 @@ import { getUserData } from './redux/actions/userActions';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
+axios.defaults.baseURL = 'https://us-central1-mydocs-3a1ce.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if (token){
   const decodedToken = jwtDecode(token);
@@ -29,7 +31,7 @@ if (token){
     //Expired token
     //window.location.href = '/login';
     //store.dispatch(logoutUser());
-    window.location.href = '/';
+    //window.location.href = '/';
   }
   else {
     store.dispatch({ type: SET_AUTH }); 
