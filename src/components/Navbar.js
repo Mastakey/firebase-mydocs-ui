@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import Link from 'react-router-dom/Link';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -33,7 +33,7 @@ class Navbar extends Component {
 
 
 Navbar.propTypes = {
-  authenticated: PropTypes.object.isRequired
+  authenticated: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => ({

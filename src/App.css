@@ -6,3 +6,7 @@
 .nav-container {
   margin: auto;
 }
+
+a{
+  text-decoration: none;
+}
