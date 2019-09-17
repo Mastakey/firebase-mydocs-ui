@@ -35,3 +35,20 @@ export const postMyDoc = (mydoc) => async (dispatch) => {
         console.log(err);
     }
 }
+
+export const getMyDoc = (id) => async (dispatch) => {
+    dispatch({type: LOADING_MYDOCS});
+    try {
+        const mydoc = await axios.get(`/mydoc/${id}`);
+        dispatch({
+            type: SET_MYDOC,
+            payload: mydoc.data
+        })
+    }
+    catch(err){
+        dispatch({
+            type: SET_MYDOC,
+            payload: {}
+        })
+    }
+}

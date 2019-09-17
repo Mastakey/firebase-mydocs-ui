@@ -1,7 +1,8 @@
-import { GET_MYDOCS, SET_MYDOCS, LOADING_MYDOCS, GET_MYDOC, POST_MYDOC, SET_MYDOC, DELETE_MYDOC, SET_ERRORS, CLEAR_ERRORS } from '../types';
+import { GET_MYDOCS, SET_MYDOCS, LOADING_MYDOCS, SET_MYDOC, POST_MYDOC, DELETE_MYDOC, SET_ERRORS, CLEAR_ERRORS } from '../types';
 
 const initialState = {
     mydocs: [],
+    mydoc: {},
     loading: false
 }
 
@@ -22,6 +23,12 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 mydoc: action.payload
+            }
+        case SET_MYDOC:
+            return {
+                ...state,
+                mydoc: action.payload,
+                loading: false
             }
         default: return state;
     }
