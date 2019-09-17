@@ -52,3 +52,21 @@ export const getMyDoc = (id) => async (dispatch) => {
         })
     }
 }
+
+export const deleteMyDoc = (id, history) => async (dispatch) => {
+    dispatch({type: LOADING_MYDOCS});
+    try {
+        const mydoc = await axios.delete(`/mydoc/${id}`);
+        dispatch({
+          type: DELETE_MYDOC,
+          payload: {}
+        });
+        history.push("/");
+    }
+    catch (err) {
+        dispatch({
+            type: SET_MYDOC,
+            payload: {}
+        })
+    }
+}

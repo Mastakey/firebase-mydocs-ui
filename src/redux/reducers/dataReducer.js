@@ -30,6 +30,12 @@ export default function(state = initialState, action){
                 mydoc: action.payload,
                 loading: false
             }
+        case DELETE_MYDOC:
+            return {
+                ...state,
+                mydoc: action.payload,
+                loading: false
+            }
         default: return state;
     }
 }
