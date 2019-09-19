@@ -1,4 +1,15 @@
-import { GET_MYDOCS, SET_MYDOCS, LOADING_MYDOCS, GET_MYDOC, POST_MYDOC, SET_MYDOC, DELETE_MYDOC, SET_ERRORS, CLEAR_ERRORS } from '../types';
+import {
+  GET_MYDOCS,
+  SET_MYDOCS,
+  LOADING_MYDOCS,
+  GET_MYDOC,
+  POST_MYDOC,
+  EDIT_MYDOC,
+  SET_MYDOC,
+  DELETE_MYDOC,
+  SET_ERRORS,
+  CLEAR_ERRORS
+} from "../types";
 import axios from 'axios';
 
 export const getMyDocs = () => async (dispatch) => {
@@ -23,8 +34,28 @@ export const postMyDoc = (mydoc) => async (dispatch) => {
     dispatch({type: LOADING_MYDOCS});
     try {
         const mydocdata = await axios.post('/mydoc', mydoc);
+        mydoc.delta = JSON.stringify(mydoc.delta);
         dispatch({
             type: POST_MYDOC,
+            payload: mydocdata.data
+        });
+        dispatch({
+            type: CLEAR_ERRORS,
+            payload: []
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const editMyDoc = (id, mydoc) => async (dispatch) => {
+    dispatch({ type: LOADING_MYDOCS });
+    mydoc.contentUpdated = true;
+    mydoc.delta = JSON.stringify(mydoc.delta);
+    try {
+        const mydocdata = await axios.put(`/mydoc/${id}`, mydoc);
+        dispatch({
+            type: EDIT_MYDOC,
             payload: mydocdata.data
         });
         dispatch({

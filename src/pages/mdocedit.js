@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { getMyDoc, deleteMyDoc } from '../redux/actions/dataActions';
+import { getMyDoc, deleteMyDoc, editMyDoc } from '../redux/actions/dataActions';
 import { Link } from 'react-router-dom';
 
 //MUI
@@ -9,6 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
 
 //Icons
 import EditIcon from '@material-ui/icons/Edit';
@@ -42,7 +43,8 @@ export class mdoc extends Component {
           content: '',
           delta: []
         };
-        this.handleQuillChange = this.handleQuillChange.bind(this)
+        this.handleQuillChange = this.handleQuillChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
       }
     async componentDidMount(){
         const id = this.props.match.params.id;
@@ -59,7 +61,19 @@ export class mdoc extends Component {
     }
     handleQuillChange(value, delta, source, editor){
         this.setState({ content: editor.getHTML(), delta: editor.getContents() });
-      }
+    }
+    handleSave(){
+        console.log(this.state.content);
+        let mdoc = this.props.data.mydoc.mdoc;
+        const id = this.props.match.params.id;
+        mdoc.content = this.state.content;
+        mdoc.delta = this.state.delta;
+        //TODO
+        //category
+        //title
+        //tags
+        this.props.editMyDoc(id, mdoc);
+    }
     render() {
         const classes = this.props.classes;
         let markup;
@@ -82,9 +96,10 @@ export class mdoc extends Component {
                             />
                         </Grid>
                         <Grid item xs={12}>
-
+                            <Button variant="contained" color="primary" onClick={this.handleSave} >Save</Button>
                         </Grid>
                     </Grid>
+
                 </Fragment>
             )
         }
@@ -117,7 +132,8 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = {
   getMyDoc,
-  deleteMyDoc
+  deleteMyDoc,
+  editMyDoc
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(mdoc));

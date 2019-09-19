@@ -3,6 +3,7 @@ export const SET_MYDOCS = 'SET_MYDOCS';
 export const LOADING_MYDOCS = 'LOADING_MYDOCS';
 export const GET_MYDOC = 'GET_MYDOC';
 export const POST_MYDOC = 'POST_MYDOC';
+export const EDIT_MYDOC = 'EDIT_MYDOC';
 export const SET_MYDOC = 'SET_MYDOC';
 export const DELETE_MYDOC = 'DELETE_MYDOC';
 
