@@ -56,7 +56,7 @@ export const getMyDoc = (id) => async (dispatch) => {
 export const deleteMyDoc = (id, history) => async (dispatch) => {
     dispatch({type: LOADING_MYDOCS});
     try {
-        const mydoc = await axios.delete(`/mydoc/${id}`);
+        await axios.delete(`/mydoc/${id}`);
         dispatch({
           type: DELETE_MYDOC,
           payload: {}

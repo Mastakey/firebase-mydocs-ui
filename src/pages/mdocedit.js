@@ -60,8 +60,6 @@ export class mdoc extends Component {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography variant="h2" className={classes.title}>{this.props.data.mydoc.mdoc.title}</Typography>
-                            <Link to={`/mdoc/edit/${this.props.match.params.id}`}><Fab size="small" color="default" onClick={this.handleEdit.bind(this)} className={classes.fab}><EditIcon /></Fab></Link>
-                            <Fab size="small" color="secondary" onClick={this.handleDelete.bind(this)} className={classes.fabDelete}><DeleteIcon /></Fab>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="body1"><span dangerouslySetInnerHTML={{ __html: this.props.data.mydoc.content }} /></Typography>

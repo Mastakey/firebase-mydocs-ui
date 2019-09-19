@@ -11,6 +11,7 @@ import login from './pages/login';
 import signup from './pages/signup';
 import post from './pages/post';
 import mdoc from "./pages/mdoc";
+import mdocedit from './pages/mdocedit';
 
 //Redux
 import {Provider} from 'react-redux';
@@ -54,6 +55,7 @@ function App() {
               <Route exact path="/signup" component={signup} />
               <Route exact path="/post" component={post} />
               <Route exact path="/mdoc/:id" component={mdoc}/>
+              <Route exact path="/mdoc/edit/:id" component={mdocedit}/>
             </Switch>
           </div>
         </Router>

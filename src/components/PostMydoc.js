@@ -7,23 +7,41 @@ import { postMyDoc } from '../redux/actions/dataActions';
 import Paper from '@material-ui/core/Paper';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
+
+//Quill
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 class PostMydoc extends Component {
-    state = {
-        title: '',
-        category: '',
-        content: ''
+  constructor(){
+    super();
+    this.state = {
+      title: '',
+      category: '',
+      content: '',
+      delta: []
     };
+    this.handleQuillChange = this.handleQuillChange.bind(this)
+  }
     handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state);
-        this.props.postMyDoc(this.state);
+        const mdoc = {
+          title: this.state.title,
+          category: this.state.category,
+          content: this.state.content,
+          delta: JSON.stringify(this.state.delta)
+        };
+        this.props.postMyDoc(mdoc);
     }
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
-      }
+    }
+    handleQuillChange(value, delta, source, editor){
+      this.setState({ content: editor.getHTML(), delta: editor.getContents() });
+    }
     render() {
-        
         return (
           <div>
             <h1>Post</h1>
@@ -31,6 +49,7 @@ class PostMydoc extends Component {
               <Grid item xs={12}>
                 <TextField
                   name="title"
+                  autoComplete="off"
                   label="Title"
                   variant="outlined"
                   onChange={this.handleChange}
@@ -44,30 +63,18 @@ class PostMydoc extends Component {
                   onChange={this.handleChange}
                 />
               </Grid>
+
               <Grid item xs={12}>
-                <TextField
-                    name="content"
-                    label="Content"
-                    /*style={{ height: 300 }}*/
-                    placeholder="Placeholder"
-                    helperText="Enter Contents"
-                    fullWidth
-                    multiline
-                    margin="normal"
-                            variant="outlined"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                <ReactQuill value={this.state.content}
+                    name='content'
+                    onChange={this.handleQuillChange} 
                 />
               </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" color="primary" onClick={this.handleSubmit} >Submit</Button>
+              </Grid>
+              
             </Grid>
-
-            <form>
-              <input name="title" onChange={this.handleChange}></input>
-              <input name="category" onChange={this.handleChange}></input>
-              <textarea name="content" onChange={this.handleChange}></textarea>
-              <button onClick={this.handleSubmit}>Submit</button>
-            </form>
           </div>
         );
     }

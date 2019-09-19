@@ -1,4 +1,4 @@
-import { SET_AUTH, SET_UNAUTH, SET_USER, LOADING_USER } from '../types';
+import { SET_AUTH, SET_UNAUTH, SET_USER, LOADING_USER, SIGNUP_USER } from '../types';
 
 const initialState = {
     authenticated: false,
@@ -23,6 +23,10 @@ export default function(state = initialState, action){
                 loading: false,
                 ...action.payload
             };
+        case SIGNUP_USER:
+            return {
+                ...state
+            }
         default:
             return state;
     }
