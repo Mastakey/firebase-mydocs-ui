@@ -34,27 +34,41 @@ const styles = {
 }
 
 export class mdoc extends Component {
-    state = {
-        mdoc: null
-    };
+    constructor(){
+        super();
+        this.state = {
+          title: '',
+          category: '',
+          content: '',
+          delta: []
+        };
+        this.handleQuillChange = this.handleQuillChange.bind(this)
+      }
     async componentDidMount(){
         const id = this.props.match.params.id;
         console.log(id);
         await this.props.getMyDoc(id);
+        this.setState({
+            content: this.props.data.mydoc.content,
+            delta: this.props.data.mydoc.delta
+        })
     }
     handleDelete(){
         console.log(this.props.data);
         this.props.deleteMyDoc(this.props.match.params.id, this.props.history);
     }
-    handleEdit(){
-
-    }
+    handleQuillChange(value, delta, source, editor){
+        this.setState({ content: editor.getHTML(), delta: editor.getContents() });
+      }
     render() {
         const classes = this.props.classes;
         let markup;
         console.log(this.props);
 
         if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title){
+            let quillDelta = this.props.data.mydoc.content;
+            if (this.props.data.mydoc.delta){
+            }
             markup = (
                 <Fragment>
                     <Grid container spacing={2}>
@@ -62,7 +76,10 @@ export class mdoc extends Component {
                             <Typography variant="h2" className={classes.title}>{this.props.data.mydoc.mdoc.title}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1"><span dangerouslySetInnerHTML={{ __html: this.props.data.mydoc.content }} /></Typography>
+                            <ReactQuill value={this.state.content}
+                                name='content'
+                                onChange={this.handleQuillChange} 
+                            />
                         </Grid>
                         <Grid item xs={12}>
 

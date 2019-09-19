@@ -25,9 +25,13 @@ export default function(state = initialState, action){
                 mydoc: action.payload
             }
         case SET_MYDOC:
+            const delta = action.payload.delta ? JSON.parse(action.payload.delta) : null;
             return {
                 ...state,
-                mydoc: action.payload,
+                mydoc: {
+                    ...action.payload,
+                    delta: delta
+                },
                 loading: false
             }
         case DELETE_MYDOC:
