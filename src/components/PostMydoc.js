@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 
 //Quill
 import ReactQuill from 'react-quill';
+import QuillSettings from './QuillSettings';
 import 'react-quill/dist/quill.snow.css';
 
 class PostMydoc extends Component {
@@ -66,8 +67,10 @@ class PostMydoc extends Component {
 
               <Grid item xs={12}>
                 <ReactQuill value={this.state.content}
-                    name='content'
-                    onChange={this.handleQuillChange} 
+                            modules={QuillSettings.modules}
+                            formats={QuillSettings.formats}
+                            name='content'
+                            onChange={this.handleQuillChange} 
                 />
               </Grid>
               <Grid item xs={12}>

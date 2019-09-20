@@ -17,6 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 //Quill
 import ReactQuill from 'react-quill';
+import QuillSettings from '../components/QuillSettings';
 import 'react-quill/dist/quill.snow.css';
 
 const styles = {
@@ -90,7 +91,10 @@ export class mdoc extends Component {
                             <Typography variant="h2" className={classes.title}>{this.props.data.mydoc.mdoc.title}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <ReactQuill value={this.state.content}
+                            <ReactQuill 
+                                value={this.state.content}
+                                modules={QuillSettings.modules}
+                                formats={QuillSettings.formats}
                                 name='content'
                                 onChange={this.handleQuillChange} 
                             />
