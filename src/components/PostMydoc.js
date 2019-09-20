@@ -3,16 +3,25 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { postMyDoc } from '../redux/actions/dataActions';
 
+
 //MUI
+import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from '@material-ui/core/Paper';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Quill
 import ReactQuill from 'react-quill';
 import QuillSettings from './QuillSettings';
 import 'react-quill/dist/quill.snow.css';
+
+const styles = {
+  progress: {
+    position: 'absolute'
+  }
+}
 
 class PostMydoc extends Component {
   constructor(){
@@ -23,9 +32,9 @@ class PostMydoc extends Component {
       content: '',
       delta: []
     };
-    this.handleQuillChange = this.handleQuillChange.bind(this)
+    this.handleQuillChange = this.handleQuillChange.bind(this);
   }
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         console.log(this.state);
         const mdoc = {
@@ -34,7 +43,8 @@ class PostMydoc extends Component {
           content: this.state.content,
           delta: JSON.stringify(this.state.delta)
         };
-        this.props.postMyDoc(mdoc);
+        console.log(this.props);
+        await this.props.postMyDoc(mdoc, this.props.history);
     }
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
@@ -43,6 +53,8 @@ class PostMydoc extends Component {
       this.setState({ content: editor.getHTML(), delta: editor.getContents() });
     }
     render() {
+      const loading = this.props.data.loading;
+      const classes = this.props.classes;
         return (
           <div>
             <h1>Post</h1>
@@ -66,17 +78,27 @@ class PostMydoc extends Component {
               </Grid>
 
               <Grid item xs={12}>
-                <ReactQuill value={this.state.content}
-                            modules={QuillSettings.modules}
-                            formats={QuillSettings.formats}
-                            name='content'
-                            onChange={this.handleQuillChange} 
+                <ReactQuill
+                  value={this.state.content}
+                  modules={QuillSettings.modules}
+                  formats={QuillSettings.formats}
+                  name="content"
+                  onChange={this.handleQuillChange}
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button variant="contained" color="primary" onClick={this.handleSubmit} >Submit</Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={loading}
+                  onClick={this.handleSubmit}
+                >
+                  Submit
+                  {loading && (
+                    <CircularProgress size={30} className={classes.progress} />
+                  )}
+                </Button>
               </Grid>
-              
             </Grid>
           </div>
         );
@@ -92,4 +114,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, {postMyDoc})(PostMydoc);
+export default connect(mapStateToProps, { postMyDoc })(withStyles(styles)(PostMydoc));

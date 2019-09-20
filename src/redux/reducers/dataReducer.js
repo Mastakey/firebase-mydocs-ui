@@ -32,7 +32,8 @@ export default function(state = initialState, action){
         case POST_MYDOC:
             return {
                 ...state,
-                mydoc: action.payload
+                mydoc: action.payload,
+                loading: false
             }
         case EDIT_MYDOC:
             return {

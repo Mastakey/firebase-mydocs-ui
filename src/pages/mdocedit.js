@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Icons
 import EditIcon from '@material-ui/icons/Edit';
@@ -32,6 +33,9 @@ const styles = {
     },
     fabDelete: {
         float: "right"
+    },
+    progress: {
+        position: 'absolute'
     }
 }
 
@@ -77,6 +81,7 @@ export class mdoc extends Component {
     }
     render() {
         const classes = this.props.classes;
+        const loading = this.props.data.loading;
         let markup;
         console.log(this.props);
 
@@ -85,27 +90,41 @@ export class mdoc extends Component {
             if (this.props.data.mydoc.delta){
             }
             markup = (
-                <Fragment>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography variant="h2" className={classes.title}>{this.props.data.mydoc.mdoc.title}</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ReactQuill 
-                                value={this.state.content}
-                                modules={QuillSettings.modules}
-                                formats={QuillSettings.formats}
-                                name='content'
-                                onChange={this.handleQuillChange} 
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Button variant="contained" color="primary" onClick={this.handleSave} >Save</Button>
-                        </Grid>
-                    </Grid>
-
-                </Fragment>
-            )
+              <Fragment>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h2" className={classes.title}>
+                      {this.props.data.mydoc.mdoc.title}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <ReactQuill
+                      value={this.state.content}
+                      modules={QuillSettings.modules}
+                      formats={QuillSettings.formats}
+                      name="content"
+                      onChange={this.handleQuillChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.handleSave}
+                      disabled={loading}
+                    >
+                      Save
+                      {loading && (
+                        <CircularProgress
+                          size={30}
+                          className={classes.progress}
+                        />
+                      )}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Fragment>
+            );
         }
         else {
             markup = (

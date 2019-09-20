@@ -6,7 +6,7 @@ export class post extends Component {
     render() {
         return (
             <div>
-                <PostMydoc />
+                <PostMydoc history={this.props.history}/>
             </div>
         )
     }

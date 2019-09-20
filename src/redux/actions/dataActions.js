@@ -30,7 +30,7 @@ export const getMyDocs = () => async (dispatch) => {
     }
 }
 
-export const postMyDoc = (mydoc) => async (dispatch) => {
+export const postMyDoc = (mydoc, history) => async (dispatch) => {
     dispatch({type: LOADING_MYDOCS});
     try {
         const mydocdata = await axios.post('/mydoc', mydoc);
@@ -39,6 +39,7 @@ export const postMyDoc = (mydoc) => async (dispatch) => {
             type: POST_MYDOC,
             payload: mydocdata.data
         });
+        history.push('/');
         dispatch({
             type: CLEAR_ERRORS,
             payload: []
