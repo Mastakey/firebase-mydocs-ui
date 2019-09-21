@@ -2,19 +2,13 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { getMyDoc, deleteMyDoc, editMyDoc } from '../redux/actions/dataActions';
-import { Link } from 'react-router-dom';
 
 //MUI
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Fab from "@material-ui/core/Fab";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-//Icons
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 //Quill
 import ReactQuill from 'react-quill';
@@ -86,7 +80,6 @@ export class mdoc extends Component {
         console.log(this.props);
 
         if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title){
-            let quillDelta = this.props.data.mydoc.content;
             if (this.props.data.mydoc.delta){
             }
             markup = (

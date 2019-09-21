@@ -33,6 +33,9 @@ export class home extends Component {
                                 <Typography variant="h5" component="h3">
                                 {mydoc.title}
                                 </Typography>
+                                <Typography variant="body1">
+                                {mydoc.updatedAt ? mydoc.updatedAt : mydoc.createdAt}
+                                </Typography>
                             </Paper>
                         </RouterLink>
                   </Grid>

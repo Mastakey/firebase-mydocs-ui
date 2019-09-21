@@ -6,7 +6,6 @@ import { postMyDoc } from '../redux/actions/dataActions';
 
 //MUI
 import withStyles from "@material-ui/core/styles/withStyles";
-import Paper from '@material-ui/core/Paper';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';

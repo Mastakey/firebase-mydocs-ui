@@ -1,7 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { loginUser } from '../redux/actions/userActions';
+
+//MUI
+import withStyles from "@material-ui/core/styles/withStyles";
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Typography } from '@material-ui/core';
+
+const styles = {
+
+}
 
 export class login extends Component {
     constructor(){
@@ -26,14 +37,55 @@ export class login extends Component {
         });
     }
     render() {
+        const classes = this.props.classes;
         return (
             <div>
-                <h1>Login</h1>
-                <form>
-                    <input type="email" name="email" onChange={this.handleChange}></input>
-                    <input type="password" name="password" onChange={this.handleChange}></input>
-                    <button type="submit" onClick={this.handleSubmit}>Submit</button>
-                </form>
+                <Fragment>
+                    
+                    <Grid container alignItems="center" spacing={3}>
+                        <Grid item xs={12} alignItems="center">
+                            <Typography variant="h2">Login</Typography>
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                            required
+                            fullWidth
+                            id="outlined-email-input"
+                            label="Email"
+                            className={classes.textField}
+                            type="email"
+                            name="email"
+                            autoComplete="email"
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange}
+                            />
+                            <TextField
+                            required
+                            fullWidth
+                            id="outlined-password-input"
+                            name="password"
+                            label="Password"
+                            className={classes.textField}
+                            type="password"
+                            autoComplete="current-password"
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange}
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                onClick={this.handleSubmit}
+                            >
+                                Sign In
+                        </Button>
+                        </Grid>
+                    </Grid>
+                </Fragment>
             </div>
         )
     }
@@ -54,4 +106,4 @@ const mapActionsToProps = {
     loginUser
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(login);
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(login));

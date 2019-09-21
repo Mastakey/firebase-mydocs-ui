@@ -15,10 +15,6 @@ import Paper from "@material-ui/core/Paper";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-//Quill
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-
 const styles = {
     title: {
         display: "inline-block"
