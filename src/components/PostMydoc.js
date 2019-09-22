@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 
 //Quill
 import ReactQuill from 'react-quill';
@@ -54,6 +55,13 @@ class PostMydoc extends Component {
     render() {
       const loading = this.props.data.loading;
       const classes = this.props.classes;
+      const errors = this.props.UI.errors;
+      //Errors
+      const keys = errors ? Object.keys(errors) : [];
+      let errorStr = '';
+      keys.forEach(key => {
+          errorStr += errors[key];
+      })
         return (
           <div>
             <h1>Post</h1>
@@ -98,6 +106,9 @@ class PostMydoc extends Component {
                   )}
                 </Button>
               </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1" color="secondary">{this.props.UI.errors && errorStr}</Typography>
+              </Grid>
             </Grid>
           </div>
         );
@@ -106,11 +117,13 @@ class PostMydoc extends Component {
 
 PostMydoc.propTypes = {
     postMyDoc: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    UI: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    data: state.data
+    data: state.data,
+    UI: state.UI
 })
 
 export default connect(mapStateToProps, { postMyDoc })(withStyles(styles)(PostMydoc));

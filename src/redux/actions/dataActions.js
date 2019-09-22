@@ -2,6 +2,7 @@ import {
   GET_MYDOCS,
   SET_MYDOCS,
   LOADING_MYDOCS,
+  LOADING_UI,
   GET_MYDOC,
   POST_MYDOC,
   EDIT_MYDOC,
@@ -31,7 +32,7 @@ export const getMyDocs = () => async (dispatch) => {
 }
 
 export const postMyDoc = (mydoc, history) => async (dispatch) => {
-    dispatch({type: LOADING_MYDOCS});
+    dispatch({type: LOADING_UI});
     try {
         const mydocdata = await axios.post('/mydoc', mydoc);
         mydoc.delta = JSON.stringify(mydoc.delta);
@@ -45,6 +46,10 @@ export const postMyDoc = (mydoc, history) => async (dispatch) => {
             payload: []
         });
     } catch (err) {
+        dispatch({
+            type: SET_ERRORS,
+            payload: err.response.data
+        })
         console.log(err);
     }
 }

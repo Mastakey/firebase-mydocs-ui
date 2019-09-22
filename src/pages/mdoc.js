@@ -30,6 +30,9 @@ const styles = {
     },
     paper: {
         padding: 20
+    },
+    mdoc: {
+      lineHeight: 1
     }
 }
 
@@ -74,7 +77,7 @@ export class mdoc extends Component {
                   </Grid>
                   <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                      <Typography variant="body1">
+                      <Typography variant="body1" className={classes.mdoc}>
                         <span
                           dangerouslySetInnerHTML={{
                             __html: this.props.data.mydoc.content
