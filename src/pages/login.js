@@ -8,7 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Typography } from '@material-ui/core';
+import { Typography, CircularProgress } from '@material-ui/core';
 
 const styles = {
 
@@ -19,17 +19,16 @@ export class login extends Component {
         super();
         this.state = {
             email: '',
-            password:'',
-            errors: {}
+            password:''
         }
     }
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         const userData = {
             email: this.state.email,
             password: this.state.password
         }
-        this.props.loginUser(userData, this.props.history);
+        await this.props.loginUser(userData, this.props.history);
     }
     handleChange = (event) => {
         this.setState({
@@ -38,15 +37,23 @@ export class login extends Component {
     }
     render() {
         const classes = this.props.classes;
+        const loading = this.props.UI.loading;
+        //Errors
+        const errors = this.props.UI.errors;
+        const keys = errors ? Object.keys(errors) : [];
+        let errorStr = '';
+        keys.forEach(key => {
+            errorStr += errors[key];
+        })
         return (
             <div>
                 <Fragment>
-                    
                     <Grid container alignItems="center" spacing={3}>
-                        <Grid item xs={12} alignItems="center">
+                        <Grid item xs={12} >
                             <Typography variant="h2">Login</Typography>
                         </Grid>
                         <Grid item>
+                        <form>
                             <TextField
                             required
                             fullWidth
@@ -74,15 +81,26 @@ export class login extends Component {
                             onChange={this.handleChange}
                             />
                             <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                                onClick={this.handleSubmit}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={this.handleSubmit}
+                            disabled={loading}
                             >
-                                Sign In
-                        </Button>
+                            Sign In
+                            {loading && (
+                                <CircularProgress
+                                size={30}
+                                className={classes.progress}
+                                />
+                            )}
+                            </Button>
+                        </form>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="body1" color="secondary">{this.props.UI.errors && errorStr}</Typography>
                         </Grid>
                     </Grid>
                 </Fragment>

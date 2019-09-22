@@ -5,9 +5,16 @@ import { getMyDocs } from '../redux/actions/dataActions';
 import { Link as RouterLink } from "react-router-dom";
 
 //Material UI
+import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
+const styles = {
+    paper: {
+        padding: 10
+    }
+}
 
 export class home extends Component {
     state = {
@@ -18,6 +25,7 @@ export class home extends Component {
     }
     render() {
         let docsMarkup;
+        const classes = this.props.classes;
         console.log(this.props);
         //const { classes } = this.props;
         //this.state.mydocs contains all mydocs
@@ -29,11 +37,11 @@ export class home extends Component {
                 return (
                   <Grid item xs={3} key={key}>
                         <RouterLink to={link}>
-                            <Paper key={key}>
+                            <Paper key={key} className={classes.paper}>
                                 <Typography variant="h5" component="h3">
                                 {mydoc.title}
                                 </Typography>
-                                <Typography variant="body1">
+                                <Typography variant="subtitle2">
                                 {mydoc.updatedAt ? mydoc.updatedAt : mydoc.createdAt}
                                 </Typography>
                             </Paper>
@@ -68,4 +76,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, {getMyDocs})(home);
+export default connect(mapStateToProps, {getMyDocs})(withStyles(styles)(home));

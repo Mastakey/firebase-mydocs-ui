@@ -47,7 +47,6 @@ export class mdoc extends Component {
       }
     async componentDidMount(){
         const id = this.props.match.params.id;
-        console.log(id);
         await this.props.getMyDoc(id);
         this.setState({
             content: this.props.data.mydoc.content,
@@ -55,14 +54,12 @@ export class mdoc extends Component {
         })
     }
     handleDelete(){
-        console.log(this.props.data);
         this.props.deleteMyDoc(this.props.match.params.id, this.props.history);
     }
     handleQuillChange(value, delta, source, editor){
         this.setState({ content: editor.getHTML(), delta: editor.getContents() });
     }
     handleSave(){
-        console.log(this.state.content);
         let mdoc = this.props.data.mydoc.mdoc;
         const id = this.props.match.params.id;
         mdoc.content = this.state.content;
@@ -77,7 +74,6 @@ export class mdoc extends Component {
         const classes = this.props.classes;
         const loading = this.props.data.loading;
         let markup;
-        console.log(this.props);
 
         if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title){
             if (this.props.data.mydoc.delta){
