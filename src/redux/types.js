@@ -6,6 +6,7 @@ export const POST_MYDOC = 'POST_MYDOC';
 export const EDIT_MYDOC = 'EDIT_MYDOC';
 export const SET_MYDOC = 'SET_MYDOC';
 export const DELETE_MYDOC = 'DELETE_MYDOC';
+export const SET_HISTORY = 'SET_HISTORY';
 
 //user reducers types
 export const SET_AUTH = 'SET_AUTH';

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { getMyDoc, deleteMyDoc } from '../redux/actions/dataActions';
 import { Link } from 'react-router-dom';
+import MdocHistory from '../components/MdocHistory';
 
 //MUI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -96,7 +97,9 @@ export class mdoc extends Component {
                       </Link>
                     </Paper>
                   </Grid>
-                  <Grid item xs={12}></Grid>
+                  <Grid item xs={12}>
+                            <MdocHistory id={this.props.match.params.id} />
+                  </Grid>
                 </Grid>
               </Fragment>
             );

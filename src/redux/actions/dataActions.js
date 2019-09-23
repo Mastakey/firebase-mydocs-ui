@@ -9,6 +9,7 @@ import {
   SET_MYDOC,
   DELETE_MYDOC,
   SET_ERRORS,
+  SET_HISTORY,
   CLEAR_ERRORS
 } from "../types";
 import axios from 'axios';
@@ -104,6 +105,23 @@ export const deleteMyDoc = (id, history) => async (dispatch) => {
         dispatch({
             type: SET_MYDOC,
             payload: {}
+        })
+    }
+}
+
+export const getMyDocHistory = (id) => async (dispatch) => {
+    dispatch({ type: LOADING_MYDOCS });
+    try {
+        const mydoc = await axios.get(`/mydoc/history/${id}`);
+        dispatch({
+            type: SET_HISTORY,
+            payload: mydoc.data
+        })
+    }
+    catch (err) {
+        dispatch({
+            type: SET_HISTORY,
+            payload: []
         })
     }
 }

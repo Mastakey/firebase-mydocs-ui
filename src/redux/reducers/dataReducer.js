@@ -6,13 +6,16 @@ import {
   POST_MYDOC,
   EDIT_MYDOC,
   DELETE_MYDOC,
+  SET_HISTORY,
   SET_ERRORS,
   CLEAR_ERRORS
 } from "../types";
 
 const initialState = {
     mydocs: [],
-    mydoc: {},
+    mydoc: {
+        history: []
+    },
     loading: false
 }
 
@@ -46,6 +49,7 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 mydoc: {
+                    history: state.mydoc.history,
                     ...action.payload,
                     delta: delta
                 },
@@ -55,6 +59,15 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 mydoc: action.payload,
+                loading: false
+            }
+        case SET_HISTORY:
+            return {
+                ...state,
+                mydoc: {
+                    ...state.mydoc,
+                    history: action.payload
+                },
                 loading: false
             }
         default: return state;
