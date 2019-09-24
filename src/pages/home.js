@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
     paper: {
         padding: 10
+    },
+    header: {
+        marginBottom: 10
     }
 }
 
@@ -57,13 +60,13 @@ export class home extends Component {
             )
         }
         return (
-            <div>
-                <h1>Home</h1>
-                <Grid container spacing={3}>
-                    {docsMarkup}
-                </Grid>
-            </div>
-        )
+          <div>
+            <Typography variant="h2" className={classes.header}>Home</Typography>
+            <Grid container spacing={3}>
+              {docsMarkup}
+            </Grid>
+          </div>
+        );
     }
 }
 

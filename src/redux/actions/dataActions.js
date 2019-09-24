@@ -2,6 +2,7 @@ import {
   GET_MYDOCS,
   SET_MYDOCS,
   LOADING_MYDOCS,
+    LOADING_MYDOC,
   LOADING_UI,
   GET_MYDOC,
   POST_MYDOC,
@@ -56,7 +57,7 @@ export const postMyDoc = (mydoc, history) => async (dispatch) => {
 }
 
 export const editMyDoc = (id, mydoc) => async (dispatch) => {
-    dispatch({ type: LOADING_MYDOCS });
+    dispatch({ type: LOADING_MYDOC });
     mydoc.contentUpdated = true;
     mydoc.delta = JSON.stringify(mydoc.delta);
     try {
@@ -110,7 +111,6 @@ export const deleteMyDoc = (id, history) => async (dispatch) => {
 }
 
 export const getMyDocHistory = (id) => async (dispatch) => {
-    dispatch({ type: LOADING_MYDOCS });
     try {
         const mydoc = await axios.get(`/mydoc/history/${id}`);
         dispatch({

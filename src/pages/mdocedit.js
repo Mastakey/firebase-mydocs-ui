@@ -73,9 +73,10 @@ export class mdoc extends Component {
     render() {
         const classes = this.props.classes;
         const loading = this.props.data.loading;
+        const mdocLoading = this.props.data.mydoc.loading;
         let markup;
 
-        if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title){
+        if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title && !loading){
             if (this.props.data.mydoc.delta){
             }
             markup = (
@@ -100,10 +101,10 @@ export class mdoc extends Component {
                       variant="contained"
                       color="primary"
                       onClick={this.handleSave}
-                      disabled={loading}
+                                disabled={mdocLoading}
                     >
                       Save
-                      {loading && (
+                      {mdocLoading && (
                         <CircularProgress
                           size={30}
                           className={classes.progress}

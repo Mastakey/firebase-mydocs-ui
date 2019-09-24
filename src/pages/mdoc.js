@@ -58,7 +58,7 @@ export class mdoc extends Component {
         let markup;
         console.log(this.props);
 
-        if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title){
+        if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title ){
             markup = (
               <Fragment>
                 <Grid container spacing={2}>

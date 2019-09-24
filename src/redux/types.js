@@ -1,6 +1,7 @@
 export const GET_MYDOCS = 'GET_MYDOCS';
 export const SET_MYDOCS = 'SET_MYDOCS';
 export const LOADING_MYDOCS = 'LOADING_MYDOCS';
+export const LOADING_MYDOC = 'LOADING_MYDOC';
 export const GET_MYDOC = 'GET_MYDOC';
 export const POST_MYDOC = 'POST_MYDOC';
 export const EDIT_MYDOC = 'EDIT_MYDOC';

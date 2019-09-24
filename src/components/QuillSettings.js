@@ -10,6 +10,7 @@
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'}, 
        {'indent': '-1'}, {'indent': '+1'}],
+      [{ 'color': [] }, { 'background': [] }], 
       ['link', 'image', 'video', 'code-block'],
       ['clean']
     ],
@@ -23,11 +24,24 @@
    * See https://quilljs.com/docs/formats/
    */
   const formats = [
-    'header', 'font', 'size',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image', 'video', 'code-block'
-  ]
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "video",
+    "code-block",
+    "color",
+    "background"
+  ];
 
   export default {
     modules: modules,

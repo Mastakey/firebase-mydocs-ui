@@ -31,7 +31,7 @@ class Navbar extends Component {
           <div className={classes.root}>
           <AppBar position="static">
             <Toolbar className="nav-container">
-              <div className={classes.home}><Button color="inherit" component={Link} to ="/">Home</Button></div>
+              <div className={classes.home}><Button color="inherit" component={Link} to ="/">MyDocs</Button></div>
               <Button color="inherit" component={Link} to="/post">Post</Button>
               {!authenticated ? (
               <Fragment>
