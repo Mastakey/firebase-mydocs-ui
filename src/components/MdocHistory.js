@@ -5,14 +5,22 @@ import { getMyDocHistory } from "../redux/actions/dataActions";
 
 //MUI
 import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Fab from "@material-ui/core/Fab";
-import Paper from "@material-ui/core/Paper";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@material-ui/core/Grid';
+
 
 const styles = {
     paper: {
         padding: 20
+    },
+    heading: {
+    },
+    root: {
+        width:'100%'
     }
 };
 
@@ -26,27 +34,41 @@ export class MdocHistory extends Component {
         const classes = this.props.classes;
         const history = this.props.data.mydoc.history;
         return (
-            <Fragment>
+            <ExpansionPanel>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >History</ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                <div className={classes.root}>
                 {history && 
                     history.map(his => {
-                        console.log(his);
                         return (
-                        <Fragment>
-                            <Typography variant="subtitle">{his.createdAt}</Typography>
-                            <Paper className={classes.paper}>
-                                <Typography variant="body1" className={classes.mdoc}>
+                        <ExpansionPanel className={classes.heading}>
+                            <ExpansionPanelSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                            >
+                              <Typography className={classes.heading}>{his.createdAt}</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                              <Typography>
                                     <span
                                         dangerouslySetInnerHTML={{
                                                 __html: his.content
                                         }}
                                     />
-                                </Typography>
-                            </Paper>
-                        </Fragment>
+                              </Typography>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
                         )
                     })
                 }
-            </Fragment>
+                </div>
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
         )
     }
 }
