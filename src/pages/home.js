@@ -16,6 +16,9 @@ const styles = {
     },
     header: {
         marginBottom: 10
+    },
+    mdoc: {
+        
     }
 }
 
@@ -29,7 +32,7 @@ export class home extends Component {
     render() {
         let docsMarkup;
         const classes = this.props.classes;
-        console.log(this.props);
+        //console.log(this.props);
         //const { classes } = this.props;
         //this.state.mydocs contains all mydocs
         if (this.props.data.mydocs){
@@ -38,7 +41,7 @@ export class home extends Component {
                 key++;
                 let link = `/mdoc/${mydoc.id}`;
                 return (
-                  <Grid item xs={3} key={key}>
+                  <Grid item xs={12} sm={3} key={key} className={classes.mdoc}>
                         <RouterLink to={link}>
                             <Paper key={key} className={classes.paper}>
                                 <Typography variant="h5" component="h3">
@@ -52,7 +55,7 @@ export class home extends Component {
                   </Grid>
                 );
             }); 
-            console.log(docsMarkup);
+            //console.log(docsMarkup);
         }
         else {
             docsMarkup = (
@@ -62,7 +65,7 @@ export class home extends Component {
         return (
           <div>
             <Typography variant="h2" className={classes.header}>Home</Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} className={classes.root}>
               {docsMarkup}
             </Grid>
           </div>

@@ -27,7 +27,7 @@ const styles = {
 export class MdocHistory extends Component {
     async componentDidMount() {
         const id = this.props.id;
-        console.log(id);
+        //console.log(id);
         await this.props.getMyDocHistory(id);
     }
     render() {
@@ -45,7 +45,7 @@ export class MdocHistory extends Component {
                 {history && 
                     history.map(his => {
                         return (
-                        <ExpansionPanel className={classes.heading}>
+                        <ExpansionPanel className={classes.heading} key={his.createdAt}>
                             <ExpansionPanelSummary
                               expandIcon={<ExpandMoreIcon />}
                               aria-controls="panel1a-content"

@@ -36,14 +36,14 @@ class PostMydoc extends Component {
   }
     handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
         const mdoc = {
           title: this.state.title,
           category: this.state.category,
           content: this.state.content,
           delta: JSON.stringify(this.state.delta)
         };
-        console.log(this.props);
+        //console.log(this.props);
         await this.props.postMyDoc(mdoc, this.props.history);
     }
     handleChange = (event) => {

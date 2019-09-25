@@ -43,11 +43,11 @@ export class mdoc extends Component {
     };
     async componentDidMount(){
         const id = this.props.match.params.id;
-        console.log(id);
+        //console.log(id);
         await this.props.getMyDoc(id);
     }
     handleDelete(){
-        console.log(this.props.data);
+        //console.log(this.props.data);
         this.props.deleteMyDoc(this.props.match.params.id, this.props.history);
     }
     handleEdit(){
@@ -56,7 +56,7 @@ export class mdoc extends Component {
     render() {
         const classes = this.props.classes;
         let markup;
-        console.log(this.props);
+        //console.log(this.props);
 
         if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title ){
             markup = (

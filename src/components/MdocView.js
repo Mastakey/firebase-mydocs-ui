@@ -6,12 +6,12 @@ export class MdocView extends Component {
     
     async componentDidMount(){
         const id = this.props.id;
-        console.log(id);
+        //console.log(id);
         this.props.getMyDoc(id);
     }
     render() {
         let docMarkup;
-        console.log(this.props.data);
+        //console.log(this.props.data);
         if (this.props.data){
             docMarkup = (
                 <Fragment>
