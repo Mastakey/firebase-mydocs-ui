@@ -86,9 +86,13 @@ export const getMyDoc = (id) => async (dispatch) => {
     }
     catch(err){
         dispatch({
-            type: SET_MYDOC,
-            payload: {}
-        })
+          type: SET_ERRORS,
+          payload: err.response.data
+        });
+        dispatch({
+          type: SET_MYDOC,
+          payload: {}
+        });
     }
 }
 

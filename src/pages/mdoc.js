@@ -55,10 +55,18 @@ export class mdoc extends Component {
     }
     render() {
         const classes = this.props.classes;
+        const errors = this.props.UI.errors;
         let markup;
         //console.log(this.props);
+        if (errors) {
+            markup = (
+                <Fragment>
+                    {errors.error}
+                </Fragment>
+            )
 
-        if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title ){
+        }
+        else if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title ){
             markup = (
               <Fragment>
                 <Grid container spacing={2}>
@@ -128,7 +136,8 @@ mdoc.propTypes = {
 
 
 const mapStateToProps = state => ({
-    data: state.data
+    data: state.data,
+    UI: state.UI
 })
 
 const mapActionsToProps = {

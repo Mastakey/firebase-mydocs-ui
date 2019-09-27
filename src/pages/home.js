@@ -32,15 +32,17 @@ export class home extends Component {
     render() {
         let docsMarkup;
         const classes = this.props.classes;
+        const loading = this.props.data.loading;
         //console.log(this.props);
         //const { classes } = this.props;
         //this.state.mydocs contains all mydocs
-        if (this.props.data.mydocs){
+        if (this.props.data.mydocs && !loading){
             let key = 0;
             docsMarkup = this.props.data.mydocs.map(mydoc => {
                 key++;
                 let link = `/mdoc/${mydoc.id}`;
                 return (
+                    
                   <Grid item xs={12} sm={3} key={key} className={classes.mdoc}>
                         <RouterLink to={link}>
                             <Paper key={key} className={classes.paper}>

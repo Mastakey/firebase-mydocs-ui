@@ -74,9 +74,16 @@ export class mdoc extends Component {
         const classes = this.props.classes;
         const loading = this.props.data.loading;
         const mdocLoading = this.props.data.mydoc.loading;
+        const errors = this.props.UI.errors;
         let markup;
-
-        if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title && !loading){
+        if (errors){
+            markup = (
+                <Fragment>
+                    {errors.error}
+                </Fragment>
+            )
+        }
+        else if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title && !loading){
             if (this.props.data.mydoc.delta){
             }
             markup = (
@@ -140,7 +147,8 @@ mdoc.propTypes = {
 
 
 const mapStateToProps = state => ({
-    data: state.data
+    data: state.data,
+    UI: state.UI
 })
 
 const mapActionsToProps = {
