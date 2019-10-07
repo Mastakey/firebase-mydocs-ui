@@ -8,6 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Quill
@@ -40,6 +41,7 @@ export class mdoc extends Component {
           title: '',
           category: '',
           content: '',
+          tags: '',
           delta: []
         };
         this.handleQuillChange = this.handleQuillChange.bind(this);
@@ -48,13 +50,23 @@ export class mdoc extends Component {
     async componentDidMount(){
         const id = this.props.match.params.id;
         await this.props.getMyDoc(id);
-        this.setState({
+        let tags = '';
+        if (this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.tags) {
+            tags = JSON.stringify(this.props.data.mydoc.mdoc.tags)
+            .slice(1, -1)
+            .replace(new RegExp('"', "g"), "");
+        }
+          this.setState({
             content: this.props.data.mydoc.content,
-            delta: this.props.data.mydoc.delta
-        })
+            delta: this.props.data.mydoc.delta,
+            tags: tags
+          });
     }
     handleDelete(){
         this.props.deleteMyDoc(this.props.match.params.id, this.props.history);
+    }
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
     }
     handleQuillChange(value, delta, source, editor){
         this.setState({ content: editor.getHTML(), delta: editor.getContents() });
@@ -64,6 +76,7 @@ export class mdoc extends Component {
         const id = this.props.match.params.id;
         mdoc.content = this.state.content;
         mdoc.delta = this.state.delta;
+        mdoc.tags = this.state.tags.split(",").map(tag => tag.trim());
         //TODO
         //category
         //title
@@ -84,6 +97,7 @@ export class mdoc extends Component {
             )
         }
         else if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title && !loading){
+            console.log(this.state.tags);
             if (this.props.data.mydoc.delta){
             }
             markup = (
@@ -94,6 +108,17 @@ export class mdoc extends Component {
                       {this.props.data.mydoc.mdoc.title}
                     </Typography>
                   </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            name="tags"
+                            label="Tags"
+                            variant="outlined"
+                            value = {this.state.tags}
+                            onChange={this.handleChange}
+                                fullWidth
+                        />
+                    </Grid>
                   <Grid item xs={12}>
                     <ReactQuill
                       value={this.state.content}

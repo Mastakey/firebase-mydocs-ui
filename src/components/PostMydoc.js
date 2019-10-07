@@ -30,6 +30,7 @@ class PostMydoc extends Component {
       title: '',
       category: '',
       content: '',
+      tags: '',
       delta: []
     };
     this.handleQuillChange = this.handleQuillChange.bind(this);
@@ -41,6 +42,7 @@ class PostMydoc extends Component {
           title: this.state.title,
           category: this.state.category,
           content: this.state.content,
+          tags: this.state.tags.split(',').map(tag => tag.trim()),
           delta: JSON.stringify(this.state.delta)
         };
         //console.log(this.props);
@@ -83,7 +85,14 @@ class PostMydoc extends Component {
                   onChange={this.handleChange}
                 />
               </Grid>
-
+              <Grid item xs={12}>
+                <TextField
+                  name="tags"
+                  label="Tags"
+                  variant="outlined"
+                  onChange={this.handleChange}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <ReactQuill
                   value={this.state.content}
@@ -107,7 +116,9 @@ class PostMydoc extends Component {
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body1" color="secondary">{this.props.UI.errors && errorStr}</Typography>
+                <Typography variant="body1" color="secondary">
+                  {this.props.UI.errors && errorStr}
+                </Typography>
               </Grid>
             </Grid>
           </div>
