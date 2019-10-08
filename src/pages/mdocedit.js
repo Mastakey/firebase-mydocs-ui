@@ -97,7 +97,7 @@ export class mdoc extends Component {
             )
         }
         else if (this.props.data && this.props.data.mydoc.mdoc && this.props.data.mydoc.mdoc.title && !loading){
-            console.log(this.state.tags);
+            //console.log(this.state.tags);
             if (this.props.data.mydoc.delta){
             }
             markup = (

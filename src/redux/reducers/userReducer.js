@@ -1,4 +1,4 @@
-import { SET_AUTH, SET_UNAUTH, SET_USER, LOADING_USER, SIGNUP_USER, SET_ERRORS } from '../types';
+import { SET_AUTH, SET_UNAUTH, SET_USER, LOADING_USER, SIGNUP_USER } from '../types';
 
 const initialState = {
     authenticated: false,

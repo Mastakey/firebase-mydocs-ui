@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 
 //Pages
 import home from './pages/home';
+import tag from './pages/tag';
 import login from './pages/login';
 import signup from './pages/signup';
 import post from './pages/post';
@@ -51,11 +52,12 @@ function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={home} />
+              <Route exact path="/tag/:name" component={tag} />
               <Route exact path="/login" component={login} />
               <Route exact path="/signup" component={signup} />
               <Route exact path="/post" component={post} />
-              <Route exact path="/mdoc/:id" component={mdoc}/>
-              <Route exact path="/mdoc/edit/:id" component={mdocedit}/>
+              <Route exact path="/mdoc/:id" component={mdoc} />
+              <Route exact path="/mdoc/edit/:id" component={mdocedit} />
             </Switch>
           </div>
         </Router>

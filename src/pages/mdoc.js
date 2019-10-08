@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { getMyDoc, deleteMyDoc } from '../redux/actions/dataActions';
 import { Link } from 'react-router-dom';
 import MdocHistory from '../components/MdocHistory';
+import TagList from "../components/TagList";
 
 //MUI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -11,7 +12,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
 
 //Icons
 import EditIcon from '@material-ui/icons/Edit';
@@ -89,11 +89,9 @@ export class mdoc extends Component {
                     </Fab>
                   </Grid>
                   <Grid item xs={12}>
-                        {this.props.data.mydoc.mdoc.tags ? (
-                            this.props.data.mydoc.mdoc.tags.map(tag => {
-                                return <Chip label={tag} key={tag} className={classes.tag} />
-                            })
-                        ) : null}
+                    {this.props.data.mydoc.mdoc.tags ? (
+                      <TagList tags={this.props.data.mydoc.mdoc.tags} />
+                    ) : null}
                   </Grid>
                   <Grid item xs={12}>
                     <Paper className={classes.paper}>

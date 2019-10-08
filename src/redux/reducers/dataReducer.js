@@ -1,5 +1,4 @@
 import {
-  GET_MYDOCS,
   SET_MYDOCS,
   LOADING_MYDOCS,
     LOADING_MYDOC,
@@ -7,9 +6,7 @@ import {
   POST_MYDOC,
   EDIT_MYDOC,
   DELETE_MYDOC,
-  SET_HISTORY,
-  SET_ERRORS,
-  CLEAR_ERRORS
+  SET_HISTORY
 } from "../types";
 
 const initialState = {
